@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('product_id');
             $table->integer('payment_id')->nullable(true);
             $table->enum('status', ['pending', 'done', 'cancel']);
-            $table->float('total');
+            $table->integer('total');
             $table->timestamps();
         });
     }
