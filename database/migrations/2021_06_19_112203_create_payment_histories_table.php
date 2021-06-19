@@ -20,7 +20,7 @@ class CreatePaymentHistoriesTable extends Migration
             $table->string('transaction_id')->nullable(true);
             $table->string('status_message')->nullable(true);
             $table->string('status_code')->nullable(true);
-            $table->string('signature_key')->nullable(true);
+            $table->text('signature_key')->nullable(true);
             $table->string('payment_type')->nullable(true);
             $table->string('order_id')->nullable(true);
             $table->string('merchant_id')->nullable(true);
