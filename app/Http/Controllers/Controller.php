@@ -30,6 +30,6 @@ class Controller extends BaseController
             "code" => $code,
             "message" => $messages,
             "data" => $data
-        ], $code);
+        ], 200);
     }
 }
