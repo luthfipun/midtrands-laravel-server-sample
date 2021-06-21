@@ -43,9 +43,15 @@ class WebHookController extends Controller
             'status' => 'pending'
         ]);
 
-        $request->get('transaction_details')['order_id'] = $order->id;
+        $request->merge([
+            'transaction_details' => [
+                'order_id' => $order->id,
+                'currency' => $request->get('transaction_details')['currency'],
+                'gross_amount' => $request->get('transaction_details')['gross_amount'],
+            ]
+        ]);
 
-        $midtrans = $this->sendToMidtransServer($request);
+        $midtrans = $this->sendToMidtransServer($request->json()->all());
 
         if ($midtrans != null){
             return $midtrans;
@@ -66,10 +72,10 @@ class WebHookController extends Controller
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Basic '.base64_encode($midtransKey.':').''
             ],
-            'body' => json_encode($data, JSON_NUMERIC_CHECK)
+            'json' => $data
         ]);
 
-        if ($res->getStatusCode() == 200){
+        if ($res->getStatusCode() == 201){
             return json_decode($res->getBody(), TRUE);
         }else {
             return null;
