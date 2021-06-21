@@ -44,7 +44,6 @@ class WebHookController extends Controller
         ]);
 
         $request->get('transaction_details')['order_id'] = $order->id;
-        $request->get('transaction_details')['gross_amount'] = (int) $request->get('transaction_details')['gross_amount'];
 
         $midtrans = $this->sendToMidtransServer($request);
 
@@ -67,7 +66,7 @@ class WebHookController extends Controller
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Basic '.base64_encode($midtransKey.':').''
             ],
-            'body' => json_encode($data, TRUE)
+            'body' => json_encode($data, JSON_NUMERIC_CHECK)
         ]);
 
         if ($res->getStatusCode() == 200){
