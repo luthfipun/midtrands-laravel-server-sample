@@ -44,6 +44,7 @@ class WebHookController extends Controller
         ]);
 
         $request->get('transaction_details')['order_id'] = $order->id;
+        $request->get('transaction_details')['gross_amount'] = (int) $request->get('transaction_details')['gross_amount'];
 
         $midtrans = $this->sendToMidtransServer($request);
 
