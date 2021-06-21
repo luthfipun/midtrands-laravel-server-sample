@@ -50,19 +50,4 @@ class AppController extends Controller
 
         return $this->respondSuccess($data);
     }
-
-    public function orders(Request $request){
-
-        if (!$request->get('product_id') && !$request->get('total')){
-            return $this->respondError(204, 'field is empty');
-        }
-
-        $order = Order::create([
-            'product_id' => $request->get('product_id'),
-            'total' => $request->get('total'),
-            'status' => 'pending'
-        ]);
-
-        return $this->respondSuccess(['order_id' => $order->id]);
-    }
 }

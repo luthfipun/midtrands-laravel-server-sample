@@ -23,15 +23,7 @@ class CreatePaymentHistoriesTable extends Migration
             $table->text('signature_key')->nullable(true);
             $table->string('payment_type')->nullable(true);
             $table->string('order_id')->nullable(true);
-            $table->string('merchant_id')->nullable(true);
-            $table->string('masked_card')->nullable(true);
             $table->string('gross_amount')->nullable(true);
-            $table->string('fraud_status')->nullable(true);
-            $table->string('currency')->nullable(true);
-            $table->string('channel_response_message')->nullable(true);
-            $table->string('channel_response_code')->nullable(true);
-            $table->string('card_type')->nullable(true);
-            $table->string('bank')->nullable(true);
             $table->string('approval_code')->nullable(true);
             $table->timestamps();
         });

@@ -25,9 +25,9 @@ Route::get('test', [TestController::class, 'test']);
 
 //webhook midtrands
 Route::post('webhook/transaction', [WebHookController::class, 'index']);
+Route::post('charge', [WebHookController::class, 'charge']);
 
 //mobile API
 Route::get('products', [AppController::class, 'products']);
 Route::get('transaction', [AppController::class, 'transaction']);
 Route::get('transaction/{id}', [AppController::class, 'transaction_detail']);
-Route::post('order', [AppController::class, 'orders']);
