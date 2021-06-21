@@ -66,7 +66,7 @@ class WebHookController extends Controller
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Basic '.base64_encode($midtransKey.':').''
             ],
-            'body' => $data
+            'body' => json_encode($data, TRUE)
         ]);
 
         if ($res->getStatusCode() == 200){
