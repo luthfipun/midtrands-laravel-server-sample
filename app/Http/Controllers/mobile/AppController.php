@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\PaymentHistory;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
@@ -24,12 +23,12 @@ class AppController extends Controller
         return $this->respondSuccess($data);
     }
 
-    public function transaction_detail(Request $request){
-        if (!$request->get('id')){
+    public function transaction_detail($id){
+        if (!$id){
             return $this->respondError(204, 'field is empty');
         }
 
-        $order = Order::where('id', $request->get('id'))
+        $order = Order::where('id', $id)
             ->first();
 
         $product = Product::where('id', $order->product_id)
@@ -45,7 +44,7 @@ class AppController extends Controller
 
         $data = [
             'product' => $product,
-            'payment_history' => $payment || null
+            'payment_history' => $payment
         ];
 
         return $this->respondSuccess($data);
