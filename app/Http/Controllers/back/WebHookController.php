@@ -16,7 +16,18 @@ class WebHookController extends Controller
             return $this->respondError(500, 'empty field data');
         }
 
-        $ph = PaymentHistory::insert($request);
+        $ph = PaymentHistory::create([
+            'transaction_time' => $request->get('transaction_time'),
+            'transaction_status' => $request->get('transaction_status'),
+            'transaction_id' => $request->get('transaction_id'),
+            'status_message' => $request->get('status_message'),
+            'status_code' => $request->get('status_code'),
+            'signature_key' => $request->get('signature_key'),
+            'payment_type' => $request->get('payment_type'),
+            'order_id' => $request->get('order_id'),
+            'gross_amount' => $request->get('gross_amount'),
+            'approval_code' => $request->get('approval_code')
+        ]);
 
         Order::where('id', $request['order_id'])->update([
             'payment_id' => $ph->id,
